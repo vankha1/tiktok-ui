@@ -25,6 +25,12 @@
 .title + .icon {
     margin-left: 8px;
 }
+
+.icon{
+    display: block; // make sure to be able to set width
+    width: 25px;
+    text-align: center;
+}
 // Button types
 // Button types
 .rounded {
