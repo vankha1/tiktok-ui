@@ -8,6 +8,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
+import * as searchServices from '~/apiServices/searchServices';
 
 const cx = classNames.bind(styles);
 
@@ -22,33 +23,52 @@ function Search() {
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounce.trim()){
+        if (!debounce.trim()) {
             setSearchResult([]);
             return;
         } // space case
 
-        setLoading(true);
+        // request is an object and we call its method get
+        // another way for fetch using async/await
+        const fetchApi = async () => {
+            setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`) // encode special characters which are the same as query parameters
-            .then((res) => res.json())
+            const result = await searchServices.search(debounce);
+
+            setSearchResult(result);
+            setLoading(false);
+        }
+
+        fetchApi();
+
+        /* 
+        // using promise
+        request
+            .get('users/search', {
+                params: {
+                    q: debounce,
+                    tyle: 'less',
+                },
+            }) // encode special characters which are the same as query parameters
             .then((res) => {
                 setSearchResult(res.data);
-                setLoading(false)
+                setLoading(false);
             })
             .finally(() => {
-                setLoading(false)
-            })
+                setLoading(false);
+            }); 
+        */
     }, [debounce]);
 
     const handleClear = () => {
         setSearchValue('');
         setSearchValue([]);
         inputRef.current.focus();
-    }
+    };
 
     const handleHideResult = () => {
         setShowResult(false);
-    }
+    };
 
     return (
         <HeadlessTippy
@@ -77,15 +97,12 @@ function Search() {
                 />
                 {/* !! means converting to boolean */}
                 {!!searchValue && !loading && (
-                    <button
-                        className={cx('clear')}
-                        onClick={handleClear}
-                    >
+                    <button className={cx('clear')} onClick={handleClear}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
 
-                { loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
                 <button className={cx('search-btn')}>
                     <SearchIcon />
