@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faEllipsisVertical,
@@ -21,6 +22,7 @@ import 'tippy.js/dist/tippy.css'; // set css for Tippy
 import Menu from '~/components/Popper/Menu';
 import { UploadIcon, InboxIcon, MessageIcon } from '~/components/Icons';
 import Search from '../Search';
+import routesConfig from '~/config/routes'
 
 const cx = classNames.bind(styles); // help name css class like post-item
 
@@ -92,7 +94,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="Tiktok" />
+                <Link to={routesConfig.home} className={cx('logo-link')}><img src={images.logo} alt="Tiktok" /></Link>
                 
                 <Search />
 
@@ -123,7 +125,7 @@ function Header() {
                         </>
                     )}
                     
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange} hideOnClick={false}>
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
