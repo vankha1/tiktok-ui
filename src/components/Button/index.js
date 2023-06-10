@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
@@ -63,6 +64,10 @@ function Button({
             {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
+}
+
+Button.propTypes = {
+    children : PropTypes.node.isRequired, // make children to be anything that can be rendered : numbers, strings, elements or an array (or fragments). isRequired means we must pass children, don't leave like <Button></Button>
 }
 
 export default Button;
