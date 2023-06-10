@@ -22,7 +22,7 @@ import 'tippy.js/dist/tippy.css'; // set css for Tippy
 import Menu from '~/components/Popper/Menu';
 import { UploadIcon, InboxIcon, MessageIcon } from '~/components/Icons';
 import Search from '../Search';
-import routesConfig from '~/config/routes'
+import config from '~/config'
 
 const cx = classNames.bind(styles); // help name css class like post-item
 
@@ -166,7 +166,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('logo-link')}><img src={images.logo} alt="Tiktok" /></Link>
+                <Link to={config.routes.home} className={cx('logo-link')}><img src={images.logo} alt="Tiktok" /></Link>
                 
                 <Search />
 

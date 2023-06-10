@@ -8,7 +8,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
 import { useDebounce } from '~/hooks';
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
@@ -78,9 +78,6 @@ function Search() {
         setSearchValue(searchValue);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    }
 
     return (
         // fix bug Tiggy when Tippy appends to parent. Using a wrapper <div> tag around the reference element solves this by creating a new parentNode context.
