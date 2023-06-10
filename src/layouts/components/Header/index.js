@@ -29,9 +29,9 @@ const cx = classNames.bind(styles); // help name css class like post-item
 const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'English',
+        title: 'Language',
         children: {
-            title: 'English',
+            title: 'Language',
             data: [
                 {
                     code: 'en',

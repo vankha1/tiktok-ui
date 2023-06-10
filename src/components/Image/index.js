@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './Image.module.scss';
 import { forwardRef, useState } from 'react';
@@ -5,7 +6,7 @@ import images from '~/assets/images';
 
 //fallback: customFallback = images.noImage --> when Image element has prop fallback and is undefined, it will be set to customFallback. But if customFallback is still undefined, it will be set to images.noImage.
 
-function Image({ src, alt, className, fallback: customFallback = images.noImage,  ...props }, ref) {
+function Image({ src, alt, className, fallback: customFallback = images.noImage, ...props }, ref) {
     const [fallback, setFallback] = useState('');
 
     const handleError = () => {
@@ -23,5 +24,12 @@ function Image({ src, alt, className, fallback: customFallback = images.noImage,
         />
     );
 }
+
+Image.propTypes = {
+    src: PropTypes.string,
+    alt: PropTypes.string,
+    className: PropTypes.string,
+    fallback: PropTypes.string,
+} 
 
 export default forwardRef(Image);

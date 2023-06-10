@@ -68,6 +68,19 @@ function Button({
 
 Button.propTypes = {
     children : PropTypes.node.isRequired, // make children to be anything that can be rendered : numbers, strings, elements or an array (or fragments). isRequired means we must pass children, don't leave like <Button></Button>
+    to : PropTypes.string,
+    href : PropTypes.string,
+    primary : PropTypes.bool ,
+    outline : PropTypes.bool ,
+    text : PropTypes.bool ,
+    rounded : PropTypes.bool ,
+    disabled : PropTypes.bool ,
+    small : PropTypes.bool,
+    large : PropTypes.bool ,
+    className : PropTypes.string,
+    leftIcon : PropTypes.node,
+    rightIcon : PropTypes.node,
+    onClick : PropTypes.func
 }
 
 export default Button;
