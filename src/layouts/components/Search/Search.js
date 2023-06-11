@@ -18,12 +18,12 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    let debounce = useDebounce(searchValue, 500);
+    let debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounce.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         } // space case
@@ -33,7 +33,7 @@ function Search() {
         const fetchApi = async () => {
             setLoading(true);
 
-            const result = await searchServices.search(debounce);
+            const result = await searchServices.search(debouncedValue);
 
             setSearchResult(result);
             setLoading(false);
@@ -46,7 +46,7 @@ function Search() {
         request
             .get('users/search', {
                 params: {
-                    q: debounce,
+                    q: debouncedValue,
                     tyle: 'less',
                 },
             }) // encode special characters which are the same as query parameters
@@ -58,7 +58,7 @@ function Search() {
                 setLoading(false);
             }); 
         */
-    }, [debounce]);
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
